@@ -78,3 +78,34 @@ export type QuizData = {
   images: QuizImages;
   styles: QuizStyles;
 };
+
+export interface Question {
+  id: number;
+  question: string;
+  category: string;
+  options: string[];
+  correctAnswer: string;
+}
+
+export interface ScoreBoardProps {
+  correctScore: number;
+  wrongScore: number;
+}
+
+export interface QuestionCardProps {
+  question: Question;
+  selectedOption: string | null;
+  isChecked: boolean;
+  onOptionSelect: (option: string) => void;
+}
+
+export interface ResultModalProps {
+  isCorrect: boolean;
+  correctAnswer: string;
+  onContinue: () => void;
+}
+
+export interface ProgressBarProps {
+  currentQuestion: number;
+  totalQuestions: number;
+}
