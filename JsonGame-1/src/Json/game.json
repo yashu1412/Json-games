@@ -1,0 +1,547 @@
+{
+    "data": {
+        "author": "Yash Pawara",
+        "category": "Quiz Game",
+        "date_added": "2025-02-15",
+        "date_modified": "2025-02-15",
+        "description": "Interactive quiz game with multiple categories",
+        "draft": false,
+        "id": "quiz-game-002",
+"assets": {
+    "images": {
+        "background": "https://firebasestorage.googleapis.com/v0/b/thegoodgametheory-quiz.appspot.com/o/assets%2Fbackgroundimage.png?alt=media&token=1f432ba8-ddc0-4dda-910c-3f8861c57e4e",
+        "logo": "https://firebasestorage.googleapis.com/v0/b/thegoodgametheory-quiz.appspot.com/o/assets%2Ft.png?alt=media&token=34a0ae17-cd24-4f88-aad3-125babce0cae",
+        "correct": "https://ibb.co/XrVJVHfX",
+        "wrong": "https://ibb.co/pB3LqhxX",
+        "baby": "https://ibb.co/XrVJVHfX"
+    },
+    "sounds": {
+        "correct": "https://drive.google.com/file/d/1Te-mZvVRl2ZUcc12_-sTDGxcIAqqkHuF/view?usp=sharing",
+        "wrong": "https://drive.google.com/file/d/1OnumwivxY8bU_EJtBNLKWUVZlgK52l0M/view?usp=sharing"
+    }
+},
+        "questions": [
+            {
+                "id": 1,
+                "category": "MUSIC",
+                "question": "Which artist is known for their country music?",
+                "options": [
+                    "Carrie Underwood",
+                    "Alan Jackson",
+                    "Kelly Clarkson",
+                    "Kanye West"
+                ],
+                "correctAnswer": "Carrie Underwood"
+            },
+            {
+                "id": 2,
+                "category": "TECHNOLOGY",
+                "question": "Which city is known for its technological advancements?",
+                "options": [
+                    "SenseCity",
+                    "New York City",
+                    "Cense",
+                    "New Haven"
+                ],
+                "correctAnswer": "SenseCity"
+            }
+        ],
+        "screens": [
+            {
+                "id": "welcome-screen",
+                "type": "intro",
+                "landscape": {
+                    "divs": [
+                        {
+                            "id": "background",
+                            "styles": {
+                                "backgroundImage": "${assets.images.background}",
+                                "height": "100vh",
+                                "width": "100vw",
+                                "position": "fixed",
+                                "top": 0,
+                                "left": 0,
+                                "zIndex": -1
+                            }
+                        },
+                        {
+                            "id": "welcome-content",
+                            "styles": {
+                                "display": "flex",
+                                "flexDirection": "column",
+                                "alignItems": "center",
+                                "justifyContent": "center",
+                                "height": "100vh",
+                                "padding": "20px"
+                            },
+                            "divs": [
+                                {
+                                    "id": "game-logo",
+                                    "imageUrl": "${assets.images.logo}",
+                                    "styles": {
+                                        "width": "200px",
+                                        "height": "200px",
+                                        "marginBottom": "30px",
+                                        "animation": "bounce 2s infinite"
+                                    }
+                                },
+                                {
+                                    "id": "game-title",
+                                    "text": "Quiz Master",
+                                    "styles": {
+                                        "fontSize": "48px",
+                                        "fontWeight": "bold",
+                                        "color": "#333",
+                                        "marginBottom": "20px",
+                                        "textShadow": "2px 2px 4px rgba(0,0,0,0.2)"
+                                    }
+                                },
+                                {
+                                    "id": "start-button",
+                                    "text": "Start Game",
+                                    "styles": {
+                                        "backgroundColor": "#FBA834",
+                                        "color": "black",
+                                        "padding": "15px 40px",
+                                        "fontSize": "24px",
+                                        "fontWeight": "bold",
+                                        "border": "4px solid black",
+                                        "borderRadius": "15px",
+                                        "cursor": "pointer",
+                                        "transition": "all 0.3s ease",
+                                        "hover": {
+                                            "transform": "translateY(-5px)",
+                                            "boxShadow": "0 10px 20px rgba(0,0,0,0.2)"
+                                        }
+                                    },
+                                    "events": [
+                                        {
+                                            "trigger": "click",
+                                            "type": "ACTION.START_GAME"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "game-screen",
+                "type": "game",
+                "landscape": {
+                    "divs": [
+                        {
+                            "id": "background",
+                            "styles": {
+                                "backgroundImage": "${assets.images.background}",
+                                "height": "100vh",
+                                "width": "100vw",
+                                "position": "fixed",
+                                "top": 0,
+                                "left": 0,
+                                "zIndex": -1
+                            }
+                        },
+                        {
+                            "id": "game-header",
+                            "styles": {
+                                "display": "flex",
+                                "justifyContent": "space-between",
+                                "padding": "20px",
+                                "alignItems": "center"
+                            },
+                            "divs": [
+                                {
+                                    "id": "score-container",
+                                    "styles": {
+                                        "display": "flex",
+                                        "gap": "20px"
+                                    },
+                                    "divs": [
+                                        {
+                                            "id": "correct-score",
+                                            "styles": {
+                                                "backgroundColor": "rgba(34, 197, 94, 0.9)",
+                                                "padding": "10px 20px",
+                                                "borderRadius": "10px",
+                                                "color": "white",
+                                                "fontWeight": "bold",
+                                                "fontSize": "18px"
+                                            },
+                                            "text": "Correct: ${correctScore}"
+                                        },
+                                        {
+                                            "id": "wrong-score",
+                                            "styles": {
+                                                "backgroundColor": "rgba(239, 68, 68, 0.9)",
+                                                "padding": "10px 20px",
+                                                "borderRadius": "10px",
+                                                "color": "white",
+                                                "fontWeight": "bold",
+                                                "fontSize": "18px"
+                                            },
+                                            "text": "Wrong: ${wrongScore}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "question-container",
+                            "styles": {
+                                "backgroundColor": "rgba(255, 255, 255, 0.95)",
+                                "borderRadius": "20px",
+                                "padding": "30px",
+                                "maxWidth": "800px",
+                                "width": "90%",
+                                "margin": "20px auto",
+                                "boxShadow": "0 10px 25px rgba(0,0,0,0.1)",
+                                "border": "4px solid black"
+                            },
+                            "divs": [
+                                {
+                                    "id": "category-badge",
+                                    "styles": {
+                                        "backgroundColor": "#FBA834",
+                                        "color": "black",
+                                        "padding": "8px 20px",
+                                        "borderRadius": "20px",
+                                        "display": "inline-block",
+                                        "marginBottom": "20px",
+                                        "fontWeight": "bold",
+                                        "border": "2px solid black"
+                                    },
+                                    "text": "${currentQuestion.category}"
+                                },
+                                {
+                                    "id": "question-text",
+                                    "styles": {
+                                        "fontSize": "24px",
+                                        "fontWeight": "bold",
+                                        "marginBottom": "30px",
+                                        "textAlign": "center"
+                                    },
+                                    "text": "${currentQuestion.question}"
+                                },
+                                {
+                                    "id": "options-grid",
+                                    "styles": {
+                                        "display": "grid",
+                                        "gridTemplateColumns": "repeat(2, 1fr)",
+                                        "gap": "15px"
+                                    },
+                                    "divs": [
+                                        {
+                                            "id": "option-template",
+                                            "repeat": "${currentQuestion.options}",
+                                            "styles": {
+                                                "backgroundColor": "#FBA834",
+                                                "padding": "15px",
+                                                "borderRadius": "12px",
+                                                "border": "3px solid black",
+                                                "fontSize": "18px",
+                                                "fontWeight": "bold",
+                                                "cursor": "pointer",
+                                                "transition": "all 0.3s ease",
+                                                "hover": {
+                                                    "transform": "translateY(-2px)",
+                                                    "boxShadow": "0 5px 15px rgba(0,0,0,0.1)"
+                                                }
+                                            },
+                                            "text": "${option}",
+                                            "events": [
+                                                {
+                                                    "trigger": "click",
+                                                    "type": "ACTION.CHECK_ANSWER",
+                                                    "payload": "${option}"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "result-modal",
+                            "styles": {
+                                "position": "fixed",
+                                "top": 0,
+                                "left": 0,
+                                "width": "100vw",
+                                "height": "100vh",
+                                "backgroundColor": "rgba(0, 0, 0, 0.5)",
+                                "display": "none",
+                                "justifyContent": "center",
+                                "alignItems": "center",
+                                "zIndex": 100
+                            },
+                            "divs": [
+                                {
+                                    "id": "result-content",
+                                    "styles": {
+                                        "backgroundColor": "white",
+                                        "borderRadius": "20px",
+                                        "padding": "30px",
+                                        "maxWidth": "400px",
+                                        "width": "90%",
+                                        "textAlign": "center",
+                                        "border": "4px solid black",
+                                        "animation": "popIn 0.5s ease-out"
+                                    },
+                                    "divs": [
+                                        {
+                                            "id": "result-image",
+                                            "imageUrl": "${isCorrect ? assets.images.correct : assets.images.wrong}",
+                                            "styles": {
+                                                "width": "200px",
+                                                "height": "200px",
+                                                "marginBottom": "20px",
+                                                "animation": "bounce 1s infinite"
+                                            }
+                                        },
+                                        {
+                                            "id": "result-text",
+                                            "styles": {
+                                                "fontSize": "28px",
+                                                "fontWeight": "bold",
+                                                "marginBottom": "15px",
+                                                "color": "${isCorrect ? '#4CAF50' : '#FF5252'}"
+                                            },
+                                            "text": "${isCorrect ? 'Correct!' : 'Wrong!'}"
+                                        },
+                                        {
+                                            "id": "continue-button",
+                                            "styles": {
+                                                "backgroundColor": "#FBA834",
+                                                "color": "black",
+                                                "padding": "12px 30px",
+                                                "borderRadius": "10px",
+                                                "border": "3px solid black",
+                                                "fontSize": "18px",
+                                                "fontWeight": "bold",
+                                                "cursor": "pointer",
+                                                "transition": "all 0.3s ease",
+                                                "hover": {
+                                                    "transform": "translateY(-2px)",
+                                                    "backgroundColor": "#fb9834"
+                                                }
+                                            },
+                                            "text": "Continue",
+                                            "events": [
+                                                {
+                                                    "trigger": "click",
+                                                    "type": "ACTION.CONTINUE"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "navigation",
+                            "styles": {
+                                "position": "fixed",
+                                "bottom": "20px",
+                                "left": 0,
+                                "right": 0,
+                                "display": "flex",
+                                "justifyContent": "space-between",
+                                "padding": "0 40px"
+                            },
+                            "divs": [
+                                {
+                                    "id": "prev-button",
+                                    "imageUrl": "${assets.images.prevButton}",
+                                    "styles": {
+                                        "width": "50px",
+                                        "height": "50px",
+                                        "cursor": "pointer",
+                                        "transition": "transform 0.3s ease",
+                                        "hover": {
+                                            "transform": "scale(1.1)"
+                                        }
+                                    },
+                                    "events": [
+                                        {
+                                            "trigger": "click",
+                                            "type": "ACTION.PREV"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "next-button",
+                                    "imageUrl": "${assets.images.nextButton}",
+                                    "styles": {
+                                        "width": "50px",
+                                        "height": "50px",
+                                        "cursor": "pointer",
+                                        "transition": "transform 0.3s ease",
+                                        "hover": {
+                                            "transform": "scale(1.1)"
+                                        }
+                                    },
+                                    "events": [
+                                        {
+                                            "trigger": "click",
+                                            "type": "ACTION.NEXT"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "portrait": {
+                    "divs": [
+                        {
+                            "id": "background",
+                            "styles": {
+                                "backgroundImage": "url('https://firebasestorage.googleapis.com/v0/b/thegoodgametheory-quiz.appspot.com/o/assets%2Fbackgroundimage.png?alt=media&token=1f432ba8-ddc0-4dda-910c-3f8861c57e4e')",
+                                "borderRadius": "0px",
+                                "height": "100vh",
+                                "position": "absolute",
+                                "width": "100vw",
+                                "zIndex": "-1"
+                            }
+                        },
+                        {
+                            "id": "img-1",
+                            "imageUrl": "https://firebasestorage.googleapis.com/v0/b/thegoodgametheory-quiz.appspot.com/o/assets%2FBlue_and_Green_Modern_Gradient_Trivia_Night_Game_Presentation__2_-removebg-preview.png?alt=media&token=151043ab-d0c1-4373-a6e3-b6fb760f86d9",
+                            "styles": {
+                                "borderRadius": "10px",
+                                "zIndex": "-1",
+                                "display": "flex",
+                                "justifyContent": "center",
+                                "alignItems": "center",
+                                "width": "300px",
+                                "height": "200px",
+                                "position": "absolute",
+                                "top": "50%",
+                                "left": "50%",
+                                "transform": "translate(-50%, -50%)"
+                            }
+                        },
+                        {
+                            "id": "text-content",
+                            "styles": {
+                                "height": "60vh",
+                                "position": "absolute",
+                                "width": "50%",
+                                "fontFamily": "Arial, sans-serif",
+                                "fontSize": "10px",
+                                "left": "25%",
+                                "top": "50%",
+                                "transform": "translateY(-50%)",
+                                "textAlign": "center",
+                                "fontWeight": "bold",
+                                "transition": "color 0.3s",
+                                "hover": {
+                                    "color": "green"
+                                }
+                            },
+                            "text": "A host will guide this game, which takes a 60-minute session You will be divided into small groups There will be themed trivia or custom questions The host asks one question at a time, and teams write down their answers The host calls out the correct answers and then teams tally up their points"
+                        },
+                        {
+                            "events": [
+                                {
+                                    "payload": "",
+                                    "trigger": "click",
+                                    "type": "ACTION.PREV"
+                                }
+                            ],
+                            "id": "btn-prev-1l-001",
+                            "imageUrl": "https://firebasestorage.googleapis.com/v0/b/thegoodgametheory-quiz.appspot.com/o/assets%2Fbutton_prev.svg?alt=media&token=811ebf77-dd80-4025-ba8a-f862a9550291",
+                            "styles": {
+                                "height": "5.5rem",
+                                "left": "5%",
+                                "position": "absolute",
+                                "width": "5rem"
+                            }
+                        },
+                        {
+                            "events": [
+                                {
+                                    "payload": "",
+                                    "trigger": "next-event",
+                                    "type": "ACTION.NEXT"
+                                },
+                                {
+                                    "payload": "",
+                                    "trigger": "click",
+                                    "type": "ACTION.NEXT"
+                                }
+                            ],
+                            "id": "btn-next-1l-001",
+                            "imageUrl": "https://firebasestorage.googleapis.com/v0/b/thegoodgametheory-quiz.appspot.com/o/assets%2Fbutton_next.svg?alt=media&token=e40a5d10-a663-4461-9cb1-b29bd93dde0b",
+                            "styles": {
+                                "height": "5.5rem",
+                                "left": "95%",
+                                "position": "absolute",
+                                "width": "5rem"
+                            }
+                        },
+                        {
+                            "id": "button-1",
+                            "styles": {
+                                "backgroundColor": "#FBA834",
+                                "color": "black",
+                                "fontWeight": "bold",
+                                "height": "8%",
+                                "padding": "10px",
+                                "position": "absolute",
+                                "textAlign": "center",
+                                "top": "30%",
+                                "width": "40%",
+                                "border": "4px solid black",
+                                "borderRadius": "10px",
+                                "cursor": "pointer",
+                                "left": "50%",
+                                "fontSize": "20px",
+                                "zIndex": "-1",
+                                "animationName": "panY",
+                                "animationDelay": "0.3s",
+                                "animationDirection": "normal",
+                                "animationDuration": "1.5s",
+                                "animationIterationCount": "1",
+                                "animationTimingFunction": "ease"
+                            },
+                            "text": "How To Play"
+                        }
+                    ]
+                }
+            }
+        ],
+        "animations": {
+            "bounce": {
+                "0%, 100%": {
+                    "transform": "translateY(0)"
+                },
+                "50%": {
+                    "transform": "translateY(-10px)"
+                }
+            },
+            "popIn": {
+                "0%": {
+                    "transform": "scale(0.8)",
+                    "opacity": 0
+                },
+                "100%": {
+                    "transform": "scale(1)",
+                    "opacity": 1
+                }
+            }
+        },
+        "sounds": {
+            "correct": {
+                "src": "${assets.sounds.correct}",
+                "trigger": "correctAnswer"
+            },
+            "wrong": {
+                "src": "${assets.sounds.wrong}",
+                "trigger": "wrongAnswer"
+            }
+        }
+    }
+}
